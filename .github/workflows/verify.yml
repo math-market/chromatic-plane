@@ -1,0 +1,26 @@
+name: Verify submissions
+on:
+  pull_request:
+    paths: ['submissions/**']
+  workflow_dispatch:
+    inputs:
+      file: {description: 'graph JSON to check', required: false, default: 'examples/moser_spindle.json'}
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: '3.x'}
+      - run: pip install --quiet sympy
+      - name: Check
+        run: |
+          set +e
+          echo "## Chromatic-plane — verification" >> "$GITHUB_STEP_SUMMARY"; echo "" >> "$GITHUB_STEP_SUMMARY"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then files="${{ inputs.file }}"; else files=$(ls submissions/*.json 2>/dev/null); fi
+          [ -z "$files" ] && { echo "No submission JSON." >> "$GITHUB_STEP_SUMMARY"; exit 0; }
+          fail=0
+          for f in $files; do out=$(python3 check.py "$f"); code=$?; echo "- \`$f\` → $out" >> "$GITHUB_STEP_SUMMARY"; [ "$code" -ne 0 ] && fail=1; done
+          exit $fail
