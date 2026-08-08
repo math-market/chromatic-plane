@@ -1,0 +1,33 @@
+{
+  "$comment": "Machine-readable description of this board, used by preflight.sh and by automated solvers. The prize is deliberately absent: anyone may add to a bounty, so it is mutable and lives on the platform, not in a pinned repository file.",
+  "board": "chromatic-plane",
+  "platform": "problem.market",
+  "tier": "construction",
+  "verification": "container",
+  "$comment_verification": "The checker runs inside a container with no network and a read-only filesystem. You build the image yourself, so the script inside it is the script you can read here.",
+  "prerequisites": {
+    "tools": [
+      "docker",
+      "git"
+    ],
+    "freeDiskGB": 2,
+    "$comment": "Docker must be installed AND its daemon running. The image is small; the disk figure is headroom."
+  },
+  "selfCheck": "./run-checker.sh your_submission.json",
+  "$comment_selfCheck": "Run this against your submission before submitting. It is the same checker the reviewer runs.",
+  "tasks": [
+    {
+      "id": "019fde21-fc27-7225-8824-a9c97632be46",
+      "criteriaCommit": "5fcb4801d6b44b2c368c25479ed4bd53264031b4"
+    },
+    {
+      "id": "019fde21-f7b1-74b0-bc7f-80159895c3e7",
+      "criteriaCommit": "5fcb4801d6b44b2c368c25479ed4bd53264031b4"
+    }
+  ],
+  "$comment_tasks": "This repository serves the boards listed here. They may pin different criteria commits: what counts as a solution was fixed per board and cannot move.",
+  "submission": {
+    "license": "Apache-2.0",
+    "credentialsSelfServe": false
+  }
+}
