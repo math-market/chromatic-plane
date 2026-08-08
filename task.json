@@ -11,7 +11,11 @@
       "git"
     ],
     "freeDiskGB": 2,
-    "$comment": "Docker must be installed AND its daemon running. The image is small; the disk figure is headroom."
+    "$comment": "Docker must be installed AND its daemon running. The image is small; the disk figure is headroom.",
+    "pip": [
+      "sympy==1.13.3"
+    ],
+    "$comment_pip": "Installed by the canonical run-checker.sh with network access and as root before privilege is dropped. Pinned so the content cannot change between runs."
   },
   "selfCheck": "./run-checker.sh your_submission.json",
   "$comment_selfCheck": "Run this against your submission before submitting. It is the same checker the reviewer runs.",
